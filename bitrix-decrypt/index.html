@@ -1,1 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
 
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="https://public-frontend-cos.metadl.com/mgx/img/favicon.png" type="image/png">
+    <title>Bitrix Password Decryptor</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <script type="module" crossorigin src="/assets/index-cC0Wb9fX.js"></script>
+  <link rel="stylesheet" crossorigin href="/assets/index-B8BFpmjV.css">
+</head>
+
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <div class="header-content">
+                <div class="logo">
+                    <div class="logo-icon">🔓</div>
+                    <h1>Bitrix Password Decryptor</h1>
+                </div>
+                <p class="subtitle">Secure password decryption for Bitrix plugins</p>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Plugin Selection -->
+            <div class="decrypt-options">
+                <div class="option-card mail-card" onclick="selectOption('mail')">
+                    <div class="card-header">
+                        <div class="card-icon">📧</div>
+                        <h3>Mail Plugin</h3>
+                    </div>
+                    <p class="card-description">Decrypt passwords encrypted by Bitrix Mail Plugin using CAllMailUtil::Decrypt method</p>
+                    <div class="card-action">
+                        <button class="select-btn">Select</button>
+                    </div>
+                </div>
+
+                <div class="option-card ldap-card" onclick="selectOption('ldap')">
+                    <div class="card-header">
+                        <div class="card-icon">🔐</div>
+                        <h3>LDAP Plugin</h3>
+                    </div>
+                    <p class="card-description">Decrypt passwords encrypted by Bitrix LDAP Plugin using Encryption::decrypt method</p>
+                    <div class="card-action">
+                        <button class="select-btn">Select</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Examples Section -->
+            <div class="examples">
+                <h3>Test Examples</h3>
+                <div class="example-grid">
+                    <div class="example-item">
+                        <span class="example-label">Mail Plugin:</span>
+                        <code class="example-code">rXTp7tZl2zM=</code>
+                        <span class="example-arrow">→</span>
+                        <span class="example-result">yie7Yei7</span>
+                    </div>
+                    <div class="example-item">
+                        <span class="example-label">LDAP Plugin:</span>
+                        <code class="example-code">RwYJ9nAzUN53LA==</code>
+                        <span class="example-arrow">→</span>
+                        <span class="example-result">CFj4CgBUDA</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Decryption Form -->
+            <div id="decrypt-form" class="decrypt-form" style="display: none;">
+                <div class="form-header">
+                    <button class="back-btn" onclick="goBack()">← Back</button>
+                    <h2 id="form-title">Password Decryption</h2>
+                </div>
+
+                <form id="password-form" class="password-form">
+                    <div class="form-group">
+                        <label for="password" class="form-label">Encrypted Password</label>
+                        <input type="text" id="password" name="password" class="form-input" 
+                               placeholder="Enter base64 encoded password" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="salt" class="form-label">Salt (Optional)</label>
+                        <input type="text" id="salt" name="salt" class="form-input" 
+                               placeholder="Enter salt value">
+                        <small id="salt-hint" class="form-hint">Default: empty string</small>
+                    </div>
+
+                    <button type="submit" class="decrypt-btn">
+                        <span class="btn-text">Decrypt Password</span>
+                        <div class="btn-loader" style="display: none;"></div>
+                    </button>
+                </form>
+
+                <!-- Result Display -->
+                <div id="result" class="result-container" style="display: none;">
+                    <div class="result-header">
+                        <h3>Decrypted Password</h3>
+                        <button id="copy-btn" class="copy-btn" onclick="copyResult()">Copy</button>
+                    </div>
+                    <div class="result-content">
+                        <code id="result-content"></code>
+                    </div>
+                </div>
+
+                <!-- Error Display -->
+                <div id="error" class="error-container" style="display: none;">
+                    <div class="error-header">
+                        <h3>Error</h3>
+                    </div>
+                    <div class="error-content">
+                        <p id="error-content"></p>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <p>&copy; 2024 Bitrix Password Decryptor. Secure client-side decryption.</p>
+        </footer>
+    </div>
+
+</body>
+
+</html>
